@@ -174,7 +174,7 @@ class SignalStrengthLayer: CALayer {
     let cornerRadius: CGFloat = min(barWidth, minHeight) * 0.25
         
     func animateHeight(_ height: CGFloat, index: Int) -> CGFloat {
-      if animatedRamp != 0, animatedLevel != 0 {
+      if animatedWave == 0 || animatedRamp > 0 {
         return (height - minHeight) * CGFloat(self.animatedRamp) + minHeight
       } else {
         let i = CGFloat(index)
