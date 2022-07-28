@@ -19,29 +19,33 @@ public enum Level: Int, CaseIterable {
   case excellent
 }
 
-
+@IBDesignable
 public class SignalStrengthIndicator: UIView {
   
   // MARK: - Class property
   
   private var signalStrengthLayer: SignalStrengthLayer!
 	
-
-  private var _level = Level.noSignal
-	
-	public var level: Level {
+  
+//  private lazy var _level = {Level(rawValue: indicator) ?? .excellent}()
+  @IBInspectable
+  private var _level: Int = 0
+  
+ // @IBInspectable
+  public var level: Level {
 		get {
-			return _level
+      return Level(rawValue: _level) ?? .noSignal
 		}
 		set(newValue) {
       search = false
-			_level = newValue
+      _level = newValue.rawValue
       signalStrengthLayer.level = newValue
 			setNeedsDisplay()
 		}
 	}
   
   private var _search = false
+  
   public var search: Bool {
     get {
       return _search
@@ -55,9 +59,37 @@ public class SignalStrengthIndicator: UIView {
 	
 	// MARK: - Customization
 	
-	public var edgeInsets = UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
+  /// top inset space
+  @IBInspectable
+  var topInset: CGFloat = 3
+  
+  /// left inset space
+  @IBInspectable
+  var leftInset: CGFloat = 3
+  
+  /// bottom inset space
+  @IBInspectable
+  var bottomInset: CGFloat = 3
+
+  /// right inset space
+  @IBInspectable
+  var rightInset: CGFloat = 3
+
+//  public var edgeInsets: UIEdgeInsets!// = UIEdgeInsets(top: topInset, left: 3, bottom: 3, right: 3)
+
+  /// spacing between the indicator bars
+  @IBInspectable
 	public var spacing: CGFloat = 3
-  public var barColor = UIColor.systemGray
+  
+  /// roundess of the indicators bars range 0..100 %
+  @IBInspectable
+  public var roundness: CGFloat = 50
+  
+  /// color of the indicator bar
+  @IBInspectable
+  public var barColor: UIColor = UIColor.systemGray
+  
+  //@IBInspectable
   public var animationDuration: Float = 0.2
 	
 	// MARK: - Constants
@@ -87,8 +119,9 @@ public class SignalStrengthIndicator: UIView {
     signalStrengthLayer.myBackgroundColor = backgroundColor
     signalStrengthLayer.color = barColor
     signalStrengthLayer.animationDuration = animationDuration
-    signalStrengthLayer.edgeInsets = edgeInsets
+    signalStrengthLayer.edgeInsets =  UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
     signalStrengthLayer.spacing = spacing
+    signalStrengthLayer.roundness = roundness
     signalStrengthLayer.indicatorsCount = indicatorsCount
     signalStrengthLayer.level = level
     signalStrengthLayer.search = search
@@ -98,7 +131,7 @@ public class SignalStrengthIndicator: UIView {
 	// MARK: - Drawing
 	
   override public func draw(_ rect: CGRect) {
-    print("draw indicator")
+    //print("draw indicator")
     super.draw(rect)
     setupLayerProperties()
   }

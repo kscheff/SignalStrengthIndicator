@@ -22,6 +22,7 @@ class SignalStrengthLayer: CALayer {
   var animationDuration: Float!
   var edgeInsets: UIEdgeInsets!
   var spacing: CGFloat!
+  var roundness: CGFloat!
   var color: UIColor!
   var indicatorsCount: Int!
   var level: Level! {
@@ -72,6 +73,7 @@ class SignalStrengthLayer: CALayer {
       color = previous.color
       edgeInsets = previous.edgeInsets
       spacing = previous.spacing
+      roundness = previous.roundness
       indicatorsCount = previous.indicatorsCount
       startBars = previous.startBars
       level = previous.level
@@ -171,7 +173,7 @@ class SignalStrengthLayer: CALayer {
     let partialBar = modf(animatedLevel).1
     
     let minHeight = barHeight - (((barHeight * 0.8) / barsCount) * barsCount - 1)
-    let cornerRadius: CGFloat = min(barWidth, minHeight) * 0.25
+    let cornerRadius: CGFloat = min(barWidth, minHeight) * roundness/200
         
     func animateHeight(_ height: CGFloat, index: Int) -> CGFloat {
       if animatedWave == 0 || animatedRamp > 0 {

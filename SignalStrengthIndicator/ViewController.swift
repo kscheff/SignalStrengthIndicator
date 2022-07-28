@@ -16,18 +16,18 @@ class ViewController: UIViewController {
 	
 	// MARK: - Level
 	
-	fileprivate var level: Int = 5
+	fileprivate var level: Int!
 
 	// MARK: - Controller Loading
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-    signalStrength.level = .noSignal
+    level = signalStrength.level.rawValue
 		signalStrength.barColor = UIColor.gray
 	}
   
   override func viewDidAppear(_ animated: Bool) {
-    signalStrength.level = .excellent
+    //signalStrength.level = .excellent
   }
 	
 	// MARK: - Actions

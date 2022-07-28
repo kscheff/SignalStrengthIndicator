@@ -26,6 +26,11 @@
                                     <constraint firstAttribute="height" constant="90" id="XDc-Z4-wNM"/>
                                     <constraint firstAttribute="width" constant="120" id="yb8-gn-5UD"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="indicator">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BeK-Oh-2Dt">
                                 <rect key="frame" x="69" y="414" width="50" height="30"/>
