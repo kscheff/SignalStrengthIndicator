@@ -13,6 +13,7 @@
 		948586262015D016003E0963 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 948586252015D016003E0963 /* Assets.xcassets */; };
 		948586292015D016003E0963 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 948586272015D016003E0963 /* LaunchScreen.storyboard */; };
 		948586322015D09B003E0963 /* SignalStrengthIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948586312015D09B003E0963 /* SignalStrengthIndicator.swift */; };
+		E5C73FBA289161030072E47C /* SignalStrengthLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C73FB9289161030072E47C /* SignalStrengthLayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		948586282015D016003E0963 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9485862A2015D016003E0963 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		948586312015D09B003E0963 /* SignalStrengthIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalStrengthIndicator.swift; sourceTree = "<group>"; };
+		E5C73FB9289161030072E47C /* SignalStrengthLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalStrengthLayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				948586312015D09B003E0963 /* SignalStrengthIndicator.swift */,
+				E5C73FB9289161030072E47C /* SignalStrengthLayer.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 			files = (
 				948586212015D016003E0963 /* ViewController.swift in Sources */,
 				948586322015D09B003E0963 /* SignalStrengthIndicator.swift in Sources */,
+				E5C73FBA289161030072E47C /* SignalStrengthLayer.swift in Sources */,
 				9485861F2015D016003E0963 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,10 +296,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9V8SY527DR;
 				INFOPLIST_FILE = SignalStrengthIndicator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.maximbilan.SignalStrengthIndicator;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.blue-battery.SignalStrengthIndicator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -307,10 +312,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9V8SY527DR;
 				INFOPLIST_FILE = SignalStrengthIndicator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.maximbilan.SignalStrengthIndicator;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.blue-battery.SignalStrengthIndicator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

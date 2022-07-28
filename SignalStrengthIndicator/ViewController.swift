@@ -16,32 +16,40 @@ class ViewController: UIViewController {
 	
 	// MARK: - Level
 	
-	fileprivate var level: Int = 0
+	fileprivate var level: Int = 5
 
 	// MARK: - Controller Loading
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		signalStrength.color = UIColor.gray
+    signalStrength.level = .noSignal
+		signalStrength.barColor = UIColor.gray
 	}
+  
+  override func viewDidAppear(_ animated: Bool) {
+    signalStrength.level = .excellent
+  }
 	
 	// MARK: - Actions
 	
 	@IBAction func upPressed(_ sender: UIButton) {
 		let value = self.level + 1
-		if let level = SignalStrengthIndicator.Level(rawValue: value) {
+		if let level = Level(rawValue: value) {
 			signalStrength.level = level
 			 self.level = value
-		}
+    } else {
+      signalStrength.search = true
+    }
 	}
 	
 	@IBAction func downPressed(_ sender: UIButton) {
 		let value = self.level - 1
-		if let level = SignalStrengthIndicator.Level(rawValue: value) {
+		if let level = Level(rawValue: value) {
 			signalStrength.level = level
 			self.level = value
-		}
+    } else {
+      signalStrength.search = true
+    }
 	}
 	
 }
