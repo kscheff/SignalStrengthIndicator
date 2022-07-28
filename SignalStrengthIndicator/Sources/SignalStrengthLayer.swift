@@ -36,7 +36,7 @@ class SignalStrengthLayer: CALayer {
       actionRun(.ramp)
       actionRun(.wave)
       if search {
-        level = .noSignal
+        //level = .noSignal
         animatedRamp = 0
         animatedWave = CGFloat(indicatorsCount + 6)
       } else {
