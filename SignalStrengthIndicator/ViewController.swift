@@ -23,7 +23,7 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
     level = signalStrength.level.rawValue
-		signalStrength.barColor = UIColor.gray
+		//signalStrength.barColor = UIColor.gray
 	}
   
   override func viewDidAppear(_ animated: Bool) {
