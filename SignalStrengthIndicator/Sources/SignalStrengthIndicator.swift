@@ -37,7 +37,7 @@ public class SignalStrengthIndicator: UIView {
       return Level(rawValue: _level) ?? .noSignal
 		}
 		set(newValue) {
-      search = false
+      search = newValue == .noSignal && waveNoSignal ? true : false
       _level = newValue.rawValue
       signalStrengthLayer.level = newValue
 			setNeedsDisplay()
@@ -84,6 +84,10 @@ public class SignalStrengthIndicator: UIView {
   /// roundess of the indicators bars range 0..100 %
   @IBInspectable
   public var roundness: CGFloat = 50
+  
+  /// start  wave animation when no signal is set
+  @IBInspectable
+  public var waveNoSignal: Bool = true
   
   /// color of the indicator bar
   @IBInspectable

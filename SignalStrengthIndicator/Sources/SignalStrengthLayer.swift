@@ -29,7 +29,6 @@ class SignalStrengthLayer: CALayer {
     didSet {
       actionRun(.level)
       animatedLevel = CGFloat(level.rawValue)
-      search = false
     }
   }
   var search: Bool! {
