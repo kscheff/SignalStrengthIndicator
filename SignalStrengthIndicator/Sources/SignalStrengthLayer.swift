@@ -16,6 +16,8 @@ import UIKit
 
 class SignalStrengthLayer: CALayer {
   
+  var firstRun = true
+  
   //Layer propery
   var startBars: Float!
   var myBackgroundColor: UIColor!
@@ -23,26 +25,30 @@ class SignalStrengthLayer: CALayer {
   var edgeInsets: UIEdgeInsets!
   var spacing: CGFloat!
   var roundness: CGFloat!
-  var color: UIColor!
+  var barColor: UIColor!
   var indicatorsCount: Int!
   var level: Level! {
     didSet {
-      actionRun(.level)
-      animatedLevel = CGFloat(level.rawValue)
+      if oldValue != level {
+        actionRun(.level)
+        animatedLevel = CGFloat(level.rawValue)
+      }
     }
   }
   var search: Bool! {
     didSet {
-      actionRun(.ramp)
-      actionRun(.wave)
-      if search {
-        //level = .noSignal
-        animatedRamp = 0
-        animatedWave = CGFloat(indicatorsCount + 6)
-      } else {
-        animatedRamp = 1
-        actionStop(.wave)
-        animatedWave = 0
+      if (oldValue != search) || firstRun {
+        firstRun = false
+        if search {
+          actionRun(.ramp)
+          actionRun(.wave)
+          animatedRamp = 0
+          animatedWave = CGFloat(indicatorsCount + 6)
+        } else {
+          animatedRamp = 1
+          actionStop(.wave)
+          animatedWave = 0
+        }
       }
     }
   }
@@ -69,7 +75,7 @@ class SignalStrengthLayer: CALayer {
       animatedLevel = previous.animatedLevel
       animatedRamp = previous.animatedRamp
       myBackgroundColor = previous.myBackgroundColor
-      color = previous.color
+      barColor = previous.barColor
       edgeInsets = previous.edgeInsets
       spacing = previous.spacing
       roundness = previous.roundness
@@ -79,8 +85,9 @@ class SignalStrengthLayer: CALayer {
       search = previous.search
     }
     setup()
+    makeAnimationsPersistent()
   }
-  
+    
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
@@ -148,6 +155,7 @@ class SignalStrengthLayer: CALayer {
     removeAnimation(forKey: key)
     let animation = CABasicAnimation(keyPath: key)
     animation.fromValue = presentation()?.value(forKey: key) as? Float ?? 0
+    //animation.toValue = CGFloat(indicatorsCount + 6)
     animation.timeOffset = CFTimeInterval(animationDuration)
     animation.timingFunction = CAMediaTimingFunction(name: .linear)
     animation.duration = CFTimeInterval(animationDuration) * CFTimeInterval(indicatorsCount) * 2
@@ -159,7 +167,7 @@ class SignalStrengthLayer: CALayer {
   
   
   override func draw(in ctx: CGContext) {
-    print("draw search layer \(animatedLevel) \(animatedRamp) \(animatedWave)")
+    //print("draw search layer \(animatedLevel) \(animatedRamp) \(animatedWave)")
     ctx.saveGState()
     
     let rect = frame
@@ -209,8 +217,8 @@ class SignalStrengthLayer: CALayer {
       
       ctx.resetClip()
       ctx.addPath(clipPath)
-      ctx.setFillColor(color.cgColor)
-      ctx.setStrokeColor(color.cgColor)
+      ctx.setFillColor(barColor.cgColor)
+      ctx.setStrokeColor(barColor.cgColor)
       
       switch index {
       case 0..<fullBars :

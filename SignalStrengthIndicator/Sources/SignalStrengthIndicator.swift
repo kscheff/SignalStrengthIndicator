@@ -31,16 +31,21 @@ public class SignalStrengthIndicator: UIView {
   @IBInspectable
   private var _level: Int = 0
   
+  private var firstRun = true
+  
  // @IBInspectable
   public var level: Level {
 		get {
       return Level(rawValue: _level) ?? .noSignal
 		}
-		set(newValue) {
-      search = newValue == .noSignal && waveNoSignal ? true : false
-      _level = newValue.rawValue
-      signalStrengthLayer.level = newValue
-			setNeedsDisplay()
+		set {
+      if (newValue.rawValue != _level) || firstRun {
+        firstRun = false
+        search = newValue == .noSignal && waveNoSignal ? true : false
+        _level = newValue.rawValue
+        signalStrengthLayer.level = newValue
+        setNeedsDisplay()
+      }
 		}
 	}
   
@@ -61,29 +66,53 @@ public class SignalStrengthIndicator: UIView {
 	
   /// top inset space
   @IBInspectable
-  var topInset: CGFloat = 3
+  var topInset: CGFloat = 3 {
+    didSet {
+      signalStrengthLayer.edgeInsets.top = topInset
+    }
+  }
   
   /// left inset space
   @IBInspectable
-  var leftInset: CGFloat = 3
-  
+  var leftInset: CGFloat = 3 {
+    didSet {
+      signalStrengthLayer.edgeInsets.left = leftInset
+    }
+  }
+
   /// bottom inset space
   @IBInspectable
-  var bottomInset: CGFloat = 3
+  var bottomInset: CGFloat = 3 {
+    didSet {
+      signalStrengthLayer.edgeInsets.bottom = bottomInset
+    }
+  }
 
   /// right inset space
   @IBInspectable
-  var rightInset: CGFloat = 3
+  var rightInset: CGFloat = 3 {
+    didSet {
+      signalStrengthLayer.edgeInsets.right = rightInset
+    }
+  }
 
 //  public var edgeInsets: UIEdgeInsets!// = UIEdgeInsets(top: topInset, left: 3, bottom: 3, right: 3)
 
   /// spacing between the indicator bars
   @IBInspectable
-	public var spacing: CGFloat = 3
+  public var spacing: CGFloat = 3 {
+    didSet {
+      signalStrengthLayer.spacing = spacing
+    }
+  }
   
   /// roundess of the indicators bars range 0..100 %
   @IBInspectable
-  public var roundness: CGFloat = 50
+  public var roundness: CGFloat = 50 {
+    didSet {
+      signalStrengthLayer.roundness = roundness
+    }
+  }
   
   /// start  wave animation when no signal is set
   @IBInspectable
@@ -91,10 +120,18 @@ public class SignalStrengthIndicator: UIView {
   
   /// color of the indicator bar
   @IBInspectable
-  public var barColor: UIColor = UIColor.systemGray
+  public var barColor: UIColor = UIColor.systemGray {
+    didSet {
+      signalStrengthLayer.barColor = barColor
+    }
+  }
   
   //@IBInspectable
-  public var animationDuration: Float = 0.2
+  public var animationDuration: Float = 0.2 {
+    didSet {
+      signalStrengthLayer.animationDuration
+    }
+  }
 	
 	// MARK: - Constants
 	
@@ -121,14 +158,16 @@ public class SignalStrengthIndicator: UIView {
   private func setupLayerProperties() {
     signalStrengthLayer.startBars = 0
     signalStrengthLayer.myBackgroundColor = backgroundColor
-    signalStrengthLayer.color = barColor
+    signalStrengthLayer.barColor = barColor
     signalStrengthLayer.animationDuration = animationDuration
     signalStrengthLayer.edgeInsets =  UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
     signalStrengthLayer.spacing = spacing
     signalStrengthLayer.roundness = roundness
     signalStrengthLayer.indicatorsCount = indicatorsCount
-    signalStrengthLayer.level = level
-    signalStrengthLayer.search = search
+    //signalStrengthLayer.level = level
+    //signalStrengthLayer.search = search
+    level = level
+    search = search
     signalStrengthLayer.frame = self.bounds
   }
   
