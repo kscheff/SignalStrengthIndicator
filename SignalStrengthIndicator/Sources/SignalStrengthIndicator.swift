@@ -129,7 +129,7 @@ public class SignalStrengthIndicator: UIView {
   //@IBInspectable
   public var animationDuration: Float = 0.2 {
     didSet {
-      signalStrengthLayer.animationDuration
+      signalStrengthLayer.animationDuration = animationDuration
     }
   }
 	
