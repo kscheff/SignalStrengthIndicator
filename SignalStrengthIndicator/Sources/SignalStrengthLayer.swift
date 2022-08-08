@@ -20,12 +20,12 @@ class SignalStrengthLayer: CALayer {
   
   //Layer propery
   var startBars: Float!
-  var myBackgroundColor: UIColor!
+  weak var myBackgroundColor: UIColor!
   var animationDuration: Float!
   var edgeInsets: UIEdgeInsets!
   var spacing: CGFloat!
   var roundness: CGFloat!
-  var barColor: UIColor!
+  weak var barColor: UIColor!
   var indicatorsCount: Int!
   var level: Level! {
     didSet {
@@ -132,9 +132,9 @@ class SignalStrengthLayer: CALayer {
   //MARK: - Animation methods
   private func createStrengthAnimation(key: String) -> CABasicAnimation {
     //print("create animation \(key)")
-    self.removeAnimation(forKey: key)
+    removeAnimation(forKey: key)
     let animation = CABasicAnimation(keyPath: key)
-    animation.fromValue = self.presentation()?.value(forKey: key)
+    animation.fromValue = presentation()?.value(forKey: key)
     animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
     animation.duration = CFTimeInterval(animationDuration)
     return animation
@@ -142,9 +142,9 @@ class SignalStrengthLayer: CALayer {
 
   private func createSearchAnimation(key: String) -> CABasicAnimation {
     //print("create animation \(key)")
-    self.removeAnimation(forKey: key)
+    removeAnimation(forKey: key)
     let animation = CABasicAnimation(keyPath: key)
-    animation.fromValue = self.presentation()?.value(forKey: key) as? Float ?? 1
+    animation.fromValue = presentation()?.value(forKey: key) as? Float ?? 1
     animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
     animation.duration = CFTimeInterval(animationDuration)
     return animation
@@ -184,7 +184,7 @@ class SignalStrengthLayer: CALayer {
         
     func animateHeight(_ height: CGFloat, index: Int) -> CGFloat {
       if animatedWave == 0 || animatedRamp > 0 {
-        return (height - minHeight) * CGFloat(self.animatedRamp) + minHeight
+        return (height - minHeight) * CGFloat(animatedRamp) + minHeight
       } else {
         let i = CGFloat(index)
         let distance = animatedWave - i - 3
