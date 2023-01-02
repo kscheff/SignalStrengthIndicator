@@ -8,6 +8,9 @@
 
 ## Preview
 
+new with animation layer:<br>
+<img src="https://github.com/kscheff/SignalStrengthIndicator/blob/master/animated_test.gif" alt="preview text" width="100" height="60">
+
 <img src="https://raw.github.com/maximbilan/SignalStrengthIndicator/master/test.gif" alt="preview text" width="100" height="60">
 
 ## Description
